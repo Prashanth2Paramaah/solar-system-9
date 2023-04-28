@@ -22,6 +22,15 @@ pipeline {
             sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
         }
       }
+    stage('Push Image') {
+      steps {
+        script {
+                withCredentials([string(credentialsId: 'docker_hub', variable: 'dockerhub_passwd')]) {
+                sh 'docker login -u prashanth2paramaah -p $dockerhub_passwd'
+                }
+        }
+      }
+    }
 
 
   }
