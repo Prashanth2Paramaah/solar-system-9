@@ -51,6 +51,14 @@ pipeline {
         }
       }
     }
+     stage('Update Manifest') {
+      steps {
+        dir("gitops-argocd/jenkins-demo") {
+          sh 'sed -i "s#prashanth2paramaah.*#${IMAGE_REPO}/${NAME}:${VERSION}#g" deployment.yaml'
+          sh 'cat deployment.yaml'
+        }
+      }
+    }
 
   }
 }
