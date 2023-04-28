@@ -57,6 +57,18 @@ pipeline {
           sh 'sed -i "s#prashanth2paramaah.*#${IMAGE_REPO}/${NAME}:${VERSION}#g" deployment.yaml'
           sh 'cat deployment.yaml'
         }
+      }https://github.com/Prashanth2Paramaah/gitops-argocd.git
+    }
+    stage('Commit & Push') {
+      steps {
+        dir("gitops-argocd/jenkins-demo") {
+          sh "git config --global user.email 'jenkins@ci.com'"
+          sh 'git remote set-url origin http://$github_token@https://github.com/Prashanth2Paramaah/gitops-argocd.git'
+          sh 'git checkout feature1'
+          sh 'git add -A'
+          sh 'git commit -am "Updated image version for Build - $VERSION"'
+          sh 'git push origin feature1'
+        }
       }
     }
 
