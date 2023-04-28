@@ -33,7 +33,24 @@ pipeline {
       }
     }
 
+    stage('Clone/Pull Repo') {
+      steps {
+        script {
+          if (fileExists('gitops-argocd')) {
 
+            echo 'Cloned repo already exists - Pulling latest changes'
+
+            dir("gitops-argocd") {
+              sh 'git pull'
+            }
+
+          } else {
+            echo 'Repo does not exists - Cloning the repo'
+            sh 'git clone -b feature1 https://github.com/Prashanth2Paramaah/gitops-argocd.git'
+          }
+        }
+      }
+    }
 
   }
 }
