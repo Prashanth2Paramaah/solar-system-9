@@ -27,10 +27,12 @@ pipeline {
         script {
                 withCredentials([string(credentialsId: 'docker_hub', variable: 'dockerhub_passwd')]) {
                 sh 'docker login -u prashanth2paramaah -p $dockerhub_passwd'
+                sh 'docker push ${IMAGE_REPO}/${NAME}:${VERSION}'
                 }
         }
       }
     }
+
 
 
   }
