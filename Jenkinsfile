@@ -57,7 +57,7 @@ pipeline {
           sh 'sed -i "s#prashanth2paramaah.*#${IMAGE_REPO}/${NAME}:${VERSION}#g" deployment.yaml'
           sh 'cat deployment.yaml'
         }
-      }https://github.com/Prashanth2Paramaah/gitops-argocd.git
+      }
     }
     stage('Commit & Push') {
       steps {
