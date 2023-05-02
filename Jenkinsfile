@@ -72,7 +72,7 @@ pipeline {
           sh 'git checkout main'
           sh 'git merge feature2'
 //           sh 'git push origin feature2'
-          sh 'git push orgin main'
+          sh 'git push origin main'
         }
       }
     }
