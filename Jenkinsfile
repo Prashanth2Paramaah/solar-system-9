@@ -69,7 +69,10 @@ pipeline {
 //           sh 'git merge feaure2'
           sh 'git add -A'
           sh 'git commit -am "Updated image version for Build - $VERSION"'
-          sh 'git push origin feature2'
+          sh 'git checkout main'
+          sh 'git merge feature2'
+//           sh 'git push origin feature2'
+          sh 'git push orgin main'
         }
       }
     }
