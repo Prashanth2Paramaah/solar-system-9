@@ -47,7 +47,7 @@ pipeline {
 
           } else {
             echo 'Repo does not exists - Cloning the repo'
-            sh 'git clone -b feature2 https://github.com/Prashanth2Paramaah/gitops-argocd.git'
+            sh 'git clone -b feature3 https://github.com/Prashanth2Paramaah/gitops-argocd.git'
           }
         }
       }
@@ -65,12 +65,12 @@ pipeline {
         dir("gitops-argocd/jenkins-demo") {
           sh "git config --global user.email 'jenkins@ci.com'"
           sh 'git remote set-url origin https://$GITHUB_TOKEN@github.com/Prashanth2Paramaah/gitops-argocd.git'
-          sh 'git checkout feature2'
+          sh 'git checkout feature3'
 //           sh 'git merge feaure2'
           sh 'git add -A'
           sh 'git commit -am "Updated image version for Build - $VERSION"'
           sh 'git checkout main'
-          sh 'git merge feature2'
+          sh 'git merge feature3'
 //           sh 'git push origin feature2'
           sh 'git push origin main'
         }
