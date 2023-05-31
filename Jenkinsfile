@@ -5,7 +5,7 @@ pipeline {
     NAME = "solar-system"
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     IMAGE_REPO = "prashanth2paramaah"
-    GITHUB_TOKEN = credentials('github_token1')
+    GITHUB_TOKEN = credentials('github_token')
 
   }
   
