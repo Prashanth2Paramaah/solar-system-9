@@ -23,7 +23,7 @@ pipeline {
             sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
         }
       }
-    stage('Push Image') {
+    stage('Push Image to Docker Registry') {
       steps {
         script {
                 withCredentials([string(credentialsId: 'docker_hub', variable: 'dockerhub_passwd')]) {
@@ -34,7 +34,7 @@ pipeline {
       }
     }
 
-    stage('Clone/Pull Repo') {
+    stage('Clone/Pull Git-Repo') {
       steps {
         script {
           if (fileExists('gitops-argocd')) {
@@ -52,7 +52,7 @@ pipeline {
         }
       }
     }
-     stage('Update Manifest') {
+     stage('Update Manifest with New Image') {
       steps {
         dir("gitops-argocd/jenkins-demo") {
           sh 'sed -i "s#prashanth2paramaah.*#${IMAGE_REPO}/${NAME}:${VERSION}#g" deployment.yaml'
@@ -60,7 +60,7 @@ pipeline {
         }
       }
     }
-    stage('Commit & Push') {
+    stage('Commit,Merge and Push the code') {
       steps {
         dir("gitops-argocd/jenkins-demo") {
           sh "git config --global user.email 'jenkins@ci.com'"
